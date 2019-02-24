@@ -48,13 +48,13 @@ class AuthenticatedClient(PublicClient):
         return result
 
     def get_account_transfers(self, account_id):
-        result = []
+#        result = []
         r = requests.get(self.url + '/accounts/{}/transfers'.format(account_id), auth=self.auth)
         # r.raise_for_status()
-        result.append(r.json())
-        if "cb-after" in r.headers:
-            self.transfers_pagination(account_id, result, r.headers["cb-after"])
-        return result
+#        result.append(r.json())
+#        if "cb-after" in r.headers:
+#            self.transfers_pagination(account_id, result, r.headers["cb-after"])
+        return r.json
 
     def transfers_pagination(self, account_id, result, after):
         r = requests.get(self.url + '/accounts/{}/transfers?after={}'.format(account_id, str(after)), auth=self.auth)
